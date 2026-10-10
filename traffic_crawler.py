@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sequential site crawler / traffic generator.
+Sequential traffic generator.
 
 - Accepts up to 3 URLs, crawled one after another (never at the same time).
 - Asks how many minutes to crawl each URL.
@@ -12,7 +12,7 @@ Only use this on sites you own or have permission to test.
 
 Requires: pip install requests
 """
-
+#begin!
 import random
 import time
 import sys
@@ -129,7 +129,7 @@ def crawl(start_url: str, minutes: float, session: requests.Session) -> None:
             errors += 1
             print(f"[ERR] {url}: {exc}")
 
-        # Sleep, but never past the end time.
+        # Sleep, but never past the end time
         sleep_for = min(REQUEST_DELAY_SECONDS, max(0, end_time - time.time()))
         time.sleep(sleep_for)
 
@@ -139,7 +139,7 @@ def crawl(start_url: str, minutes: float, session: requests.Session) -> None:
 def main() -> None:
     urls = ask_urls()
 
-    # Ask for each URL's duration up front so the crawl can run unattended.
+    # Ask for each URL's duration so the crawl can run unattended.
     plan = [(url, ask_minutes(url)) for url in urls]
 
     session = requests.Session()
